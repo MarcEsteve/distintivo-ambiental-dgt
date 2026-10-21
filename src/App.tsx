@@ -1,18 +1,17 @@
-import { useMemo, useState } from "react";
+import { useState } from "react";
+import { Vehiculo, type VehiculoData, type DistintivoAmbiental } from "./componentes/Vehiculo";
 import "./styles/dgt.css";
 
-type Registro = { matricula: string; codigo: string };
-
-// ✅ Dataset mínimo: B, C, ECO, CERO, SIN
-const DATA: Registro[] = [
-  { matricula: "0002BGP", codigo: "16TB" }, // → B
-  { matricula: "0003HMC", codigo: "16TC" }, // → C
-  { matricula: "0012KMT", codigo: "16TE" }, // → ECO
-  { matricula: "0004DJP", codigo: "SIN DISTINTIVO" }, // → SIN
-  { matricula: "9999XXX", codigo: "CERO" }, // → CERO (demo)
-  { matricula: "5334FBB", codigo: "16TC" },
-  { matricula: "CS4383AV", codigo: "SIN DISTINTIVO" }
-];
+type Registro = {
+  matricula: string;
+  codigo: string;
+  marca?: string;
+  modelo?: string;
+  combustible?: string;
+  anio?: number | string;
+  categoria?: string;
+  emisionesEuro?: string;
+};
 
 // Normaliza la matrícula: mayúsculas, sin espacios/guiones
 const normalizePlate = (s: string) => s.toUpperCase().replace(/[^A-Z0-9]/g, "");
@@ -20,7 +19,7 @@ const normalizePlate = (s: string) => s.toUpperCase().replace(/[^A-Z0-9]/g, "");
 // Decodifica el “código DGT” a distintivo oficial
 const decodeDistintivo = (
   codigo: string
-): "B" | "C" | "ECO" | "CERO" | "SIN" => {
+): DistintivoAmbiental => {
   const x = codigo.trim().toUpperCase();
   if (x.includes("SIN")) return "SIN";
   if (x.includes("CERO") || x === "0" || x.includes("0 EMISION")) return "CERO";
@@ -32,40 +31,66 @@ const decodeDistintivo = (
   return "SIN";
 };
 
-const BADGE_SRC: Record<string, string> = {
-  CERO: "/assets/distintivos/cero.png",
-  ECO: "/assets/distintivos/eco.png",
-  C: "/assets/distintivos/c.png",
-  B: "/assets/distintivos/b.png",
-  SIN: "/assets/distintivos/sin.png",
-};
-
 export default function App() {
   const [query, setQuery] = useState("");
-  const [encontrado, setEncontrado] = useState<{
-    matricula: string;
-    distintivo: string;
-  } | null>(null);
+  const [encontrado, setEncontrado] = useState<VehiculoData | null>(null);
+  const [cargando, setCargando] = useState(false);
+  const [error, setError] = useState<string | null>(null);
   const [noMatch, setNoMatch] = useState(false);
 
-  const onSubmit = (e: React.FormEvent) => {
+  const onSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     const normalized = normalizePlate(query);
-    const row = DATA.find((r) => r.matricula === normalized);
-    if (!row) {
+    if (!normalized) {
       setEncontrado(null);
-      setNoMatch(true);
+      setNoMatch(false);
+      setError(null);
       return;
     }
-    const distintivo = decodeDistintivo(row.codigo);
-    setEncontrado({ matricula: row.matricula, distintivo });
-    setNoMatch(false);
-  };
 
-  const imgSrc = useMemo(
-    () => (encontrado ? BADGE_SRC[encontrado.distintivo] : ""),
-    [encontrado]
-  );
+    setCargando(true);
+    setError(null);
+    setEncontrado(null);
+    setNoMatch(false);
+
+    try {
+      // Petición asíncrona al endpoint de datos de vehículos
+      const response = await fetch("/data/matriculas.json");
+      if (!response.ok) {
+        throw new Error("No se pudo obtener la base de datos de vehículos.");
+      }
+
+      const data: Registro[] = await response.json();
+      const row = data.find((r) => normalizePlate(r.matricula) === normalized);
+
+      if (!row) {
+        setEncontrado(null);
+        setNoMatch(true);
+      } else {
+        const distintivo = decodeDistintivo(row.codigo);
+        setEncontrado({
+          matricula: row.matricula,
+          distintivo,
+          codigo: row.codigo,
+          marca: row.marca,
+          modelo: row.modelo,
+          combustible: row.combustible,
+          anio: row.anio,
+          categoria: row.categoria,
+          emisionesEuro: row.emisionesEuro,
+        });
+        setNoMatch(false);
+      }
+    } catch (err) {
+      setError(
+        err instanceof Error
+          ? err.message
+          : "Error al realizar la consulta del distintivo ambiental."
+      );
+    } finally {
+      setCargando(false);
+    }
+  };
 
   return (
     <div className="dgt-app">
@@ -90,27 +115,27 @@ export default function App() {
             value={query}
             onChange={(e) => setQuery(e.target.value)}
             aria-label="Matrícula"
+            disabled={cargando}
           />
-          <button className="dgt-button">Buscar</button>
+          <button className="dgt-button" disabled={cargando}>
+            {cargando ? "Buscando..." : "Buscar"}
+          </button>
         </form>
 
-        {/* 🔽 Resultado justo debajo del buscador */}
-        {/* Mejora: generar un componentes de <BadgeCard className="tsx"></BadgeCard> */}
-        {encontrado && (
-          <section className="dgt-card">
-            <div className="dgt-plate">{encontrado.matricula}</div>
-            <div className="dgt-badge">
-              <img
-                src={imgSrc}
-                alt={`Distintivo ${encontrado.distintivo}`}
-                loading="lazy"
-              />
-              <p className="dgt-badge-label">{encontrado.distintivo}</p>
-            </div>
-          </section>
+        {cargando && (
+          <p className="dgt-muted">Consultando registro de vehículos...</p>
         )}
 
-        {noMatch && query && (
+        {error && (
+          <p className="dgt-muted" style={{ color: "#dc2626" }}>
+            {error}
+          </p>
+        )}
+
+        {/* 🔽 Resultado mediante el componente modular Vehiculo */}
+        {encontrado && <Vehiculo vehiculo={encontrado} />}
+
+        {noMatch && query && !cargando && (
           <p className="dgt-muted">
             No se ha encontrado la matrícula introducida.
           </p>
@@ -118,7 +143,7 @@ export default function App() {
       </main>
 
       <footer className="dgt-footer">
-        <small>© DGT · Demo educativa</small>
+        <small>© DGT · Demo educativa 2026</small>
       </footer>
     </div>
   );

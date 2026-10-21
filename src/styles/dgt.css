@@ -57,6 +57,10 @@ body {
   font-weight: 700;
   cursor: pointer;
 }
+.dgt-button:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
 .dgt-card {
   background: var(--card);
   border: 1px solid #e5e7eb;
@@ -67,6 +71,57 @@ body {
   justify-content: space-between;
   gap: 16px;
   box-shadow: 0 4px 16px rgba(0, 0, 0, 0.06);
+}
+.dgt-vehicle-card {
+  background: var(--card);
+  border: 1px solid #e5e7eb;
+  border-radius: 16px;
+  padding: 24px;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.06);
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+.dgt-vehicle-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+.dgt-vehicle-title {
+  margin: 12px 0 0;
+  font-size: 20px;
+  color: var(--text);
+  font-weight: 700;
+}
+.dgt-vehicle-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+  gap: 12px;
+  padding-top: 16px;
+  border-top: 1px solid #e2e8f0;
+}
+.dgt-vehicle-item {
+  display: flex;
+  flex-direction: column;
+  background: #f8fafc;
+  padding: 10px 14px;
+  border-radius: 8px;
+  border: 1px solid #edf2f7;
+}
+.dgt-vehicle-label {
+  font-size: 11px;
+  color: var(--muted);
+  text-transform: uppercase;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+}
+.dgt-vehicle-value {
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--text);
+  margin-top: 4px;
 }
 .dgt-plate {
   font-family: monospace;

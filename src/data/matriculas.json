@@ -1,0 +1,162 @@
+[
+  {
+    "matricula": "0002BGP",
+    "codigo": "16TB",
+    "marca": "SEAT",
+    "modelo": "Ibiza 1.4 TDI",
+    "combustible": "Diésel",
+    "anio": 2006,
+    "categoria": "Turismo (M1)",
+    "emisionesEuro": "Euro 4"
+  },
+  {
+    "matricula": "0003HMC",
+    "codigo": "16TC",
+    "marca": "Volkswagen",
+    "modelo": "Golf 2.0 TDI",
+    "combustible": "Diésel",
+    "anio": 2012,
+    "categoria": "Turismo (M1)",
+    "emisionesEuro": "Euro 5"
+  },
+  {
+    "matricula": "0012KMT",
+    "codigo": "16TE",
+    "marca": "Toyota",
+    "modelo": "Corolla 1.8 Hybrid",
+    "combustible": "Híbrido gasolina (HEV)",
+    "anio": 2019,
+    "categoria": "Turismo (M1)",
+    "emisionesEuro": "Euro 6d"
+  },
+  {
+    "matricula": "0004DJP",
+    "codigo": "SIN DISTINTIVO",
+    "marca": "Renault",
+    "modelo": "Clio 1.9 D",
+    "combustible": "Diésel",
+    "anio": 2001,
+    "categoria": "Turismo (M1)",
+    "emisionesEuro": "Euro 3"
+  },
+  {
+    "matricula": "9999XXX",
+    "codigo": "CERO",
+    "marca": "Tesla",
+    "modelo": "Model 3",
+    "combustible": "100% Eléctrico (BEV)",
+    "anio": 2023,
+    "categoria": "Turismo (M1)",
+    "emisionesEuro": "Cero emisiones"
+  },
+  {
+    "matricula": "5334FBB",
+    "codigo": "16TC",
+    "marca": "Ford",
+    "modelo": "Focus 1.6 TDCi",
+    "combustible": "Diésel",
+    "anio": 2014,
+    "categoria": "Turismo (M1)",
+    "emisionesEuro": "Euro 5"
+  },
+  {
+    "matricula": "CS4383AV",
+    "codigo": "SIN DISTINTIVO",
+    "marca": "Peugeot",
+    "modelo": "206 1.4 HDi",
+    "combustible": "Diésel",
+    "anio": 2003,
+    "categoria": "Turismo (M1)",
+    "emisionesEuro": "Euro 3"
+  },
+  {
+    "matricula": "1234ABC",
+    "codigo": "16TC",
+    "marca": "Hyundai",
+    "modelo": "Tucson 1.6 CRDi",
+    "combustible": "Diésel",
+    "anio": 2018,
+    "categoria": "Turismo (M1)",
+    "emisionesEuro": "Euro 6"
+  },
+  {
+    "matricula": "5678DEF",
+    "codigo": "16TB",
+    "marca": "Citroën",
+    "modelo": "C4 1.6 HDi",
+    "combustible": "Diésel",
+    "anio": 2008,
+    "categoria": "Turismo (M1)",
+    "emisionesEuro": "Euro 4"
+  },
+  {
+    "matricula": "9012GHI",
+    "codigo": "16TE",
+    "marca": "Kia",
+    "modelo": "Niro PHEV",
+    "combustible": "Híbrido enchufable (PHEV)",
+    "anio": 2021,
+    "categoria": "Turismo (M1)",
+    "emisionesEuro": "Euro 6d"
+  },
+  {
+    "matricula": "3456JKL",
+    "codigo": "CERO",
+    "marca": "Nissan",
+    "modelo": "Leaf",
+    "combustible": "100% Eléctrico (BEV)",
+    "anio": 2020,
+    "categoria": "Turismo (M1)",
+    "emisionesEuro": "Cero emisiones"
+  },
+  {
+    "matricula": "7890MNP",
+    "codigo": "SIN DISTINTIVO",
+    "marca": "Opel",
+    "modelo": "Corsa 1.2",
+    "combustible": "Gasolina",
+    "anio": 1999,
+    "categoria": "Turismo (M1)",
+    "emisionesEuro": "Euro 2"
+  },
+  {
+    "matricula": "M1234YZ",
+    "codigo": "SIN DISTINTIVO",
+    "marca": "SEAT",
+    "modelo": "Toledo 1.9 TDI",
+    "combustible": "Diésel",
+    "anio": 1998,
+    "categoria": "Turismo (M1)",
+    "emisionesEuro": "Euro 2"
+  },
+  {
+    "matricula": "B5678WX",
+    "codigo": "16TB",
+    "marca": "Audi",
+    "modelo": "A3 1.9 TDI",
+    "combustible": "Diésel",
+    "anio": 2006,
+    "categoria": "Turismo (M1)",
+    "emisionesEuro": "Euro 4"
+  },
+  {
+    "matricula": "1600MBB",
+    "codigo": "16MB",
+    "marca": "Honda",
+    "modelo": "CB500F",
+    "combustible": "Gasolina",
+    "anio": 2005,
+    "categoria": "Motocicleta (L3e)",
+    "emisionesEuro": "Euro 2"
+  },
+  {
+    "matricula": "1700MCC",
+    "codigo": "16MC",
+    "marca": "Yamaha",
+    "modelo": "MT-07",
+    "combustible": "Gasolina",
+    "anio": 2017,
+    "categoria": "Motocicleta (L3e)",
+    "emisionesEuro": "Euro 4"
+  }
+]
