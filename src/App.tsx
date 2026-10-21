@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { SearchForm } from "./componentes/SearchForm";
 import { Vehiculo, type VehiculoData, type DistintivoAmbiental } from "./componentes/Vehiculo";
 import "./styles/dgt.css";
 
@@ -107,20 +108,12 @@ export default function App() {
       </header>
 
       <main className="dgt-main">
-        {/* Mejora: generar un componentes de <SearchForm className="tsx"></SearchForm> */}
-        <form onSubmit={onSubmit} className="dgt-form">
-          <input
-            className="dgt-input"
-            placeholder="Ej: 1234ABC"
-            value={query}
-            onChange={(e) => setQuery(e.target.value)}
-            aria-label="Matrícula"
-            disabled={cargando}
-          />
-          <button className="dgt-button" disabled={cargando}>
-            {cargando ? "Buscando..." : "Buscar"}
-          </button>
-        </form>
+        <SearchForm
+          query={query}
+          onQueryChange={setQuery}
+          onSubmit={onSubmit}
+          cargando={cargando}
+        />
 
         {cargando && (
           <p className="dgt-muted">Consultando registro de vehículos...</p>
